@@ -1,12 +1,16 @@
-# Define environment
 dist: xenial
-sudo: false
 language: bash
 
 # Filter to only run this pipeline when it involves actions against the master branch
 branches:
   only:
     - master
+    - staging
+    - development
+    - sonarQube
+    - testing
+    - test
+    - "/^v\\d+\\.\\d+(\\.\\d+)?(-\\S*)?$/"
 
 # Export variables
 env:
