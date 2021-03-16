@@ -1,0 +1,88 @@
+#cloud-config
+
+write_files:
+  - path: /var/tmp/config.json
+    permissions: "0644"
+    content: |
+      {
+        "configEntities": {
+            "identityStore": {
+            "_type": "identityStoreType",
+            "type": "local"
+            }
+        }
+      }
+    owner: root:root
+  - path: /var/tmp/reg_templ.json
+    permissions: "0644"
+    content: |
+      {
+      "zip" : "",
+      "country" : "",
+      "city" : "",
+      "last_name" : "",
+      "industry" : "",
+      "eula" : "",
+      "title" : "",
+      "phone" : "",
+      "company" : "",
+      "state" : "",
+      "department" : "",
+      "first_name" : "",
+      "email" : ""
+      }
+    owner: root:root
+  - path: /etc/environment
+    content: |
+        LANG=en_US.UTF-8
+    append: true
+
+users:
+  - name: tableau-admin
+    groups: users
+    lock_passwd: true
+    no_create_home: false
+    system: false
+
+resize_rootfs: false
+disk_setup:
+    /dev/sdb:
+        table_type: 'gpt'
+        layout: true
+        overwrite: false
+
+fs_setup:
+    - label: DATA
+      filesystem: 'ext4'
+      device: '/dev/sdb'
+      partition: 'auto'
+
+mounts:
+    - [sdb, /opt, auto, "defaults,discard,nofail", "0", "0"]
+
+package_update: true
+packages:
+  - gdebi-core
+  - locales
+
+runcmd:
+#    - sleep 60
+    - mkdir /opt/install
+    - [ wget, "https://github.com/tableau/server-install-script-samples/raw/master/linux/automated-installer/packages/tableau-server-automated-installer-2019-1_all.deb", -O, /opt/install/tableau-server-automated-installer-2019-1_all.deb ]
+    - [ wget, "https://downloads.tableau.com/esdalt/2020.4.2/tableau-server-2020-4-2_amd64.deb", -O, /opt/install/tableau-server-2020-4-2_amd64.deb ]
+    - apt-get autoclean
+    - apt-get autoremove
+    - apt-get clean
+    - gdebi -n /opt/install/tableau-server-automated-installer-2019-1_all.deb
+    - locale-gen --purge en_US.UTF-8
+    - dpkg-reconfigure --frontend=noninteractive locales
+    - mkdir /data/install/config-files
+    - apt-get autoclean
+    - apt-get autoremove
+    - apt-get clean
+    - mv /var/tmp/config.json /data/install/config-files/config.json
+    - mv /var/tmp/reg_templ.json /data/install/config-files/reg_templ.json
+
+#power_state:
+#    mode: reboot
+#    timeout: 30
