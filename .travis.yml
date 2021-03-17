@@ -1,4 +1,7 @@
 language: bash
+env:
+  global:
+    secure: "b3bh8FS/LW6+4kuxvHaub2wdp4j3dIqkjVkV6K0hbTBtaB5A8giFKiX6XK1wERcNcRwMn0Aqgtv/v8hVDKYIkBgZ/PEpF8LnBi2DK7poEaMLJuYtgvoRUUGfg6WeFVa36e4JJ8SIla4GXef4ZwieXm/wJwTbFkRgwNG0jhBDX/0kcjEVQai0QrkSRqrNoErNF06bcPOxZRBdvdZojvCITjcQ9AUH/0iJTYsoYHjzUlCFMuPWrL7gYGNwhyM8C5F+DRFoo1JkYoe/qJ3+23qiv8jFjoDL6WlVMfoTBa3Uuyko3BLuP3SE86I3PdavQVW3Wm+LoauC8XYJ3CvDGIezYQJRLY69yD7GnH4egD5MhRhi6E2ECIIbbvHd1NlCIeoqo1fdDpwjef6RUntSjZaGRQMi+eT+DjphiSX+wR6n8wEixiiNaKOXn5cEke7hY3vrjCH3CQ3V3DttT03T9WqR2+/Uv0j6+FZqP6CYK+C2lIOD8jPTgV5EbN0oT682JxjleAC5dQFH85VD8cNL0Sdc6FELRV32rTgjHU5XuD5qfdxKE2kZPSMiGKMeXoEO6yw0Xrn5Lf6Ca/Yls6LZzrFWek9geoS1BcNrQaceNebSQ+JoPg02q2BOB30eK6WUPA7DDO2RRhDlKdXCm5Ai0FOpBu3zjUDO6wlqkydrkvRq3Cw="
 
 before_install: # Download and install Terraform for us on the container (v0.12.25)
   - wget https://releases.hashicorp.com/terraform/0.14.8/terraform_0.14.8_linux_amd64.zip
