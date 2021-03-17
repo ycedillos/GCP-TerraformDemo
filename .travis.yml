@@ -17,15 +17,14 @@ jobs:
     if: type IN (pull_request)
     script:
     - terraform init
-    - terraform plan -var-file=env\dev\vars.tfvars -out build.plan
+    - terraform plan -var-file=env\dev\vars.tfvars -auto-approve -lock=false -out build.plan
   - stage: terraform apply
     if: type IN (push) and branch = master
     script:
     - terraform init
-    - terraform plan -var-file=env\dev\vars.tfvars -out build.plan
-    - terraform apply build.plan
+    - terraform plan -var-file=env\dev\vars.tfvars -auto-approve -lock=false -out build.plan
+    - terraform apply build.plan -lock=false -auto-approve
 env:
-  - TF_INPUT=false
   global:
     secure: b2rW9AJhHtHHlvEyRSbIQrhsQ2HjGjMwxZpCvlwzkB/JCsdzeqL6DIVkYrnK2A2X6T26oIb40XiYnpqBRMa4mg7AjBnzo77WX4bTfq2knfTerfwHLgAZtFImh2XNITHHDu/GeXT1Xw4v4ashOTHImIvR34aw7n+0eRarpfgZfjBvyIY2aE8i1Dg9t2VUG+t8XR4FJYVd/RyNOIiOW1nj5JmUc79emZlxOtwW7ychzxfS9B4I+OPzQM1U5b1abKF6Lv3FUaBmvPM7SIirn3MvHDdz4BjFi5gk8wlAsaOQNhbM2LWpKup/OR/sypYf28W9vB+RyI5PkRyLisgcwZ3yCEbY+Mo4XeE3hRVEo6Q7l/1gwhJc82P1c7xKkoLFwBxlteP962B6huH++qH2kPOhnAEvELdfp943Od2CiCW7WxlPYbEvIcnGCSUp6hAWbDoYJGREEzE0faN/GGNrX589QrFTYtpQ+fVDo5nMKhiJt9DqaChUr6bI7jAJHxlZVHA2OOPegsY8E8S0Hc/burg//RKfbo81dd4TQNO260NSj4y4VREEtjUA5HrK+RwbU0gD7mjGK+ygYJSsK6srkwCci+O2kymb5/mVcUgOG8ac/Esf7/G9Yy88/Q8rIkDOcLCmBAg9QgDRfOWhH33XluPI181dp+sN2QJ5mqXWUEDyCKY=
     - GOOGLE_APPLICATION_CREDENTIALS=$TRAVIS_BUILD_DIR/sa-key.json
