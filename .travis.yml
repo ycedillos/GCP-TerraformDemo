@@ -26,4 +26,3 @@ jobs:
     - terraform init
     - terraform plan -var-file=env\dev\vars.tfvars -out build.plan
     - terraform apply build.plan
-
