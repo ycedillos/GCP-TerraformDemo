@@ -1,16 +1,5 @@
 language: bash
 
-# Filter to only run this pipeline when it involves actions against the master branch
-branches:
-  only:
-    - master
-    - staging
-    - development
-    - sonarQube
-    - testing3
-    - test
-    - "/^v\\d+\\.\\d+(\\.\\d+)?(-\\S*)?$/"
-
 before_install: # Download and install Terraform for us on the container (v0.12.25)
   - wget https://releases.hashicorp.com/terraform/0.14.8/terraform_0.14.8_linux_amd64.zip
   - unzip terraform_0.14.8_linux_amd64.zip
