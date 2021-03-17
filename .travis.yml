@@ -1,1 +1,12 @@
 language: bash
+
+# Filter to only run this pipeline when it involves actions against the master branch
+branches:
+  only:
+    - master
+    - staging
+    - development
+    - sonarQube
+    - testing3
+    - test
+    - "/^v\\d+\\.\\d+(\\.\\d+)?(-\\S*)?$/"
