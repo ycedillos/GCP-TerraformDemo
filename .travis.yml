@@ -18,13 +18,13 @@ jobs:
     script:
     - export GOOGLE_APPLICATION_CREDENTIALS="/home/travis/build/ycedillos/GCP-TerraformDemo/sa-key.json"
     - terraform init
-    - terraform plan -var-file=env\dev\vars.tfvars -auto-approve -lock=false -out build.plan
+    - terraform plan -var-file=/home/travis/build/ycedillos/GCP-TerraformDemo/env/dev/vars.tfvars -auto-approve -lock=false -out build.plan
   - stage: terraform apply
     if: type IN (push) and branch = master
     script:
     - export GOOGLE_APPLICATION_CREDENTIALS="/home/travis/build/ycedillos/GCP-TerraformDemo/sa-key.json"
     - terraform init
-    - terraform plan -var-file=env\dev\vars.tfvars -auto-approve -lock=false -out build.plan
+    - terraform plan -var-file=/home/travis/build/ycedillos/GCP-TerraformDemo/env/dev/vars.tfvars -auto-approve -lock=false -out build.plan
     - terraform apply build.plan -lock=false -auto-approve
 env:
   global:
