@@ -19,16 +19,16 @@ before_install:
 
 jobs:
   include:
-#  - stage: terraform plan
-#    if: type IN (pull_request)
-#    script:
-#    - export GOOGLE_APPLICATION_CREDENTIALS="/home/travis/build/ycedillos/GCP-TerraformDemo/sa-key.json"
-#    - terraform init
-#    - terraform plan -var-file=${TRAVIS_BUILD_DIR}/env/dev/vars.tfvars -lock=false -out build.plan
-#    - terraform apply -lock=false -auto-approve build.plan
-  - stage: terraform apply # Merge our PR - Deploy it!
-    if: type IN (push) and branch = main
-      script:
-        - terraform init
-        - terraform plan -var-file=${TRAVIS_BUILD_DIR}/env/dev/vars.tfvars -lock=false -out build.plan
-        - terraform apply build.plan
+  - stage: terraform plan
+    if: type IN (pull_request)
+    script:
+    - export GOOGLE_APPLICATION_CREDENTIALS="/home/travis/build/ycedillos/GCP-TerraformDemo/sa-key.json"
+    - terraform init
+    - terraform plan -var-file=${TRAVIS_BUILD_DIR}/env/dev/vars.tfvars -lock=false -out build.plan
+    - terraform apply -lock=false -auto-approve build.plan
+#  - stage: terraform apply # Merge our PR - Deploy it!
+#    if: type IN (push) and branch = main
+#      script:
+#        - terraform init
+#        - terraform plan -var-file=${TRAVIS_BUILD_DIR}/env/dev/vars.tfvars -lock=false -out build.plan
+#        - terraform apply build.plan
