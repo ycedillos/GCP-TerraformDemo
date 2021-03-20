@@ -6,6 +6,7 @@ branches:
     - prod
     - test
     - dev
+    - "/^v\\d+\\.\\d+(\\.\\d+)?(-\\S*)?$/"
 
 env:
   - GOOGLE_APPLICATION_CREDENTIALS=${TRAVIS_BUILD_DIR}/sa-key.json
