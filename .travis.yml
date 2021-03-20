@@ -11,7 +11,7 @@ branches:
 env:
   - GOOGLE_APPLICATION_CREDENTIALS=${TRAVIS_BUILD_DIR}/sa-key.json tf_version=0.14.8 
   - tf_init_cli_options="-input=false"
-  - tf_validation_cli_options="" 
+  - tf_validation_cli_options="-input=false" 
   - tf_plan_cli_options="-var-file=${TRAVIS_BUILD_DIR}/env/dev/vars.tfvars -lock=false" 
   - tf_apply_cli_options="-auto-approve -input=false"
 
