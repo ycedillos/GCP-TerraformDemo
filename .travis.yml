@@ -24,6 +24,7 @@ jobs:
     script:
     - terraform init $tf_init_cli_options
     - terraform validate
+    - terraform fmt -diff -recursive
     - terraform apply -var-file=${TRAVIS_BUILD_DIR}/env/dev/vars.tfvars $tf_apply_cli_options
   - stage: terraform_apply
     if: type IN (push) AND branch in (prod, test, dev)
