@@ -32,5 +32,5 @@ jobs:
   - stage: terraform_apply
     if: type IN (push) AND branch in (prod, test, dev)
     script:
-    - terraform init $tf_init_cli_options
-    - terraform apply $tf_apply_cli_options
+#    - terraform init $tf_init_cli_options
+#    - terraform apply $tf_apply_cli_options
