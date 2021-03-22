@@ -1,8 +1,8 @@
 #Defining OS image
 
 data "google_compute_image" "ubuntu" {
-  family  = "ubuntu-minimal-1804-lts"
-#  family  = "ubuntu-1804-lts"
+  family = "ubuntu-minimal-1804-lts"
+  #  family  = "ubuntu-1804-lts"
   project = "ubuntu-os-cloud"
 }
 
@@ -46,8 +46,8 @@ resource "google_compute_instance" "tableau" {
 
   metadata = {
     "enable-oslogin" = "true"
-    user-data = data.template_file.cloud-init.rendered     
-#    user-data = file("scripts/configure-drives.yaml")
+    user-data        = data.template_file.cloud-init.rendered
+    #    user-data = file("scripts/configure-drives.yaml")
   }
 
   service_account {
