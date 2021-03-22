@@ -31,9 +31,11 @@ jobs:
     - stage: terraform_plan
       if: type IN (pull_request) AND branch IN (prod, test, dev)
       script:
+#        - terraform init $tf_init_cli_options
+#        - terraform validate $tf_validation_cli_options
+#        - terraform plan $tf_plan_cli_options
         - terraform init $tf_init_cli_options
-        - terraform validate $tf_validation_cli_options
-        - terraform plan $tf_plan_cli_options
+        - terraform apply $tf_apply_cli_options
     - stage: terraform_apply
       if: type IN (push) AND branch in (prod, test, dev)
       script:
