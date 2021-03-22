@@ -27,9 +27,9 @@ jobs:
     - terraform validate
     - ./format-validation.sh
     - terraform plan -var-file=${TRAVIS_BUILD_DIR}/env/dev/vars.tfvars $tf_plan_cli_options
-    - terraform apply -var-file=${TRAVIS_BUILD_DIR}/env/dev/vars.tfvars $tf_apply_cli_options
+
   - stage: terraform_apply
     if: type IN (push) AND branch in (prod, test, dev)
     script:
     - terraform init $tf_init_cli_options
-#    - terraform apply $tf_apply_cli_options
+    - terraform apply -var-file=${TRAVIS_BUILD_DIR}/env/dev/vars.tfvars $tf_apply_cli_options
