@@ -24,6 +24,7 @@ jobs:
     script:
     - terraform init $tf_init_cli_options
     - terraform validate
+    - ls -l
     - chmod 764 format-validation.sh
     - ls -l
     - ./format-validation.sh
