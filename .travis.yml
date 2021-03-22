@@ -5,7 +5,13 @@ branches:
   - prod
   - dev
 env:
-- GOOGLE_APPLICATION_CREDENTIALS=${TRAVIS_BUILD_DIR}/sa-key.json tf_version=0.14.8 tf_init_cli_options="-input=false -lock=false" tf_validation_cli_options="-input=false" tf_plan_cli_options="-lock=false" tf_apply_cli_options="-auto-approve -input=false -lock=false"
+  global:
+    - GOOGLE_APPLICATION_CREDENTIALS=${TRAVIS_BUILD_DIR}/sa-key.json 
+    - tf_version=0.14.8 
+    - tf_init_cli_options="-input=false -lock=false" 
+    - tf_validation_cli_options="-input=false" 
+    - tf_plan_cli_options="-lock=false" 
+    - tf_apply_cli_options="-auto-approve -input=false -lock=false"
 stages:
 - terraform_plan
 - terraform_apply
