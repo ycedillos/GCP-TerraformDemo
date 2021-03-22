@@ -17,6 +17,7 @@ before_install:
 - unzip terraform_"$tf_version"_linux_amd64.zip
 - sudo mv terraform /usr/local/bin/
 - rm terraform_"$tf_version"_linux_amd64.zip
+- chmod 764 format-validation.sh
 jobs:
   include:
   - stage: terraform_plan
@@ -24,9 +25,9 @@ jobs:
     script:
     - terraform init $tf_init_cli_options
     - terraform validate
-    - chmod 764 format-validation.sh
+
     - ./format-validation.sh
-#    - terraform apply -var-file=${TRAVIS_BUILD_DIR}/env/dev/vars.tfvars $tf_apply_cli_options
+    - terraform apply -var-file=${TRAVIS_BUILD_DIR}/env/dev/vars.tfvars $tf_apply_cli_options
   - stage: terraform_apply
     if: type IN (push) AND branch in (prod, test, dev)
     script:
