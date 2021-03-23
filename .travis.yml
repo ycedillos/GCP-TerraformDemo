@@ -30,7 +30,7 @@ jobs:
     script:
     - terraform init $tf_init_cli_options
     - terraform validate
-    - ./format-validation.sh
+    - ./scripts/format-validation.sh
     - if [ "$TRAVIS_BRANCH" = "prod" ]; then terraform plan -var-file=${TRAVIS_BUILD_DIR}/env/main/vars.tfvars $tf_plan_cli_options; fi
     - if [ "$TRAVIS_BRANCH" = "dev" ]; then terraform plan -var-file=${TRAVIS_BUILD_DIR}/env/dev/vars.tfvars $tf_plan_cli_options; fi
 
