@@ -22,7 +22,7 @@ before_install:
 - unzip terraform_"$tf_version"_linux_amd64.zip
 - sudo mv terraform /usr/local/bin/
 - rm terraform_"$tf_version"_linux_amd64.zip
-- chmod 764 format-validation.sh #Ensure that we have permissions to execute the script
+- chmod 764 scripts/format-validation.sh #Ensure that we have permissions to execute the script
 jobs:
   include:
   - stage: terraform_plan
